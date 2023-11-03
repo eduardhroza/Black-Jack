@@ -11,16 +11,17 @@ class Game
   attr_reader :player, :dealer, :deck, :name
 
   def initialize
-    puts 'Welcome to Blackjack! Please enter your name:'
-    @name = gets.chomp
     @deck = Deck.new
+    begin
+      puts 'Welcome to Blackjack! Please enter your name:'
+      @name = gets.chomp
+      validate!
+    rescue RuntimeError => e
+      puts e.message
+      retry
+    end
     @player = Player.new(@name, 100)
-    @dealer = Dealer.new('Dealer', 100)
-    validate!
-  end
-
-  def validate!
-    raise 'Name cannot be empty. Please enter your name.' if @name.empty?
+    @dealer = Dealer.new(100)
   end
 
   def start
@@ -37,6 +38,10 @@ class Game
   end
 
   private
+
+  def validate!
+    raise 'Name cannot be empty. Please enter your name.' if @name.strip.empty?
+  end
 
   def setup_round
     2.times { player.take_card(deck) }
