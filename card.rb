@@ -13,7 +13,7 @@ class Card
 
   def value
     return 10 if %w[J Q K].include?(@rank)
-    return [1, 11] if @rank == 'A'  # Туз может принимать значения 1 или 11
+    return [1, 11] if @rank == 'A'  # Ace can be 1 or 11.
 
     @rank.to_i
   end
