@@ -76,13 +76,13 @@ class Game
     puts "Dealer's hand: #{dealer.show_hand}"
   end
 
-  def reveal_dealer_hand
+  def dealer_hand
     puts "Dealer's final hand: #{dealer.hand.map(&:to_s).join(', ')}"
     puts "Dealer's points: #{dealer.points}"
   end
 
   def show_final_result # rubocop:disable Metrics/AbcSize
-    reveal_dealer_hand
+    dealer_hand
 
     if player.points > 21
       puts "#{player.name} busts! Dealer wins."
